@@ -8,8 +8,10 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.droidman.ktoasty.KToasty
 import com.muhamadzain.image_uploader.R
 import com.muhamadzain.image_uploader.base.BaseActivity
 import com.muhamadzain.image_uploader.dataclass.ResponseModel
@@ -65,7 +67,7 @@ class HomeActivity : BaseActivity() , HomeContract.View {
 
     private fun sendTransaction() {
         if(fileImg == null) {
-            Toast.makeText(this@HomeActivity, "No Image for uploaded", Toast.LENGTH_SHORT).show()
+            KToasty.info(this, "No Image Uploaded.", Toast.LENGTH_SHORT, true).show()
         }else{
             presenter.onSubmit(fileImg!!)
         }
@@ -128,11 +130,11 @@ class HomeActivity : BaseActivity() , HomeContract.View {
             .apply(RequestOptions.fitCenterTransform())
             .into(previewImage)
         fileImg = null
-        Toast.makeText(this, response.message.toString(), Toast.LENGTH_SHORT).show()
+        KToasty.success(this@HomeActivity, response.message.toString(), Toast.LENGTH_SHORT, true).show()
     }
 
     override fun onreject(reject: ResponseModel) {
-        Toast.makeText(this, reject.message.toString(), Toast.LENGTH_SHORT).show()
+        KToasty.error(this, reject.message.toString(), Toast.LENGTH_SHORT, true).show()
     }
 
     override fun showLoading() {

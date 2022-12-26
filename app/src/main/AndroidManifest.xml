@@ -33,6 +33,7 @@
         <activity
             android:resizeableActivity="false"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:name=".ui.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
