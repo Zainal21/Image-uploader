@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Image Uploader</string>
+    <string name="copyright_text_hint">© Muhamad Zainal Arifin</string>
+    <string name="text_hint_splash">Image Uploader</string>
+    <string name="image_capture">Image Capture</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="take_from_gallery">Take From Gallery</string>
+    <string name="process_upload_image">Upload Image</string>
+</resources>
