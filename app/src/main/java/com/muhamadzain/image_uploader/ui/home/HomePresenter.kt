@@ -21,26 +21,25 @@ class HomePresenter (
     }
 
     override fun onSubmit(file: File) {
-            view.showLoading()
-            val map: HashMap<String, RequestBody> = HashMap()
-            val reqFile = RequestBody.create(MediaType.parse("image/*"), file)
-            val body = MultipartBody.Part.createFormData("image", file.name, reqFile)
-            val disposable = Api.endpoint.postImageUpload(body)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    view.hideLoading()
-                    if(it.success == true){
-                        view.onsucces(it)
-                    }else{
-                        view.onreject(it)
-                    }
-                    Log.d(" success ", " Success ${it.toString()}")
-                },{
-                    view.hideLoading()
-                    Log.e("error", it.toString())
-                })
-            mCompositeDisposable!!.add(disposable)
+        view.showLoading()
+        val reqFile = RequestBody.create(MediaType.parse("image/*"), file)
+        val body = MultipartBody.Part.createFormData("image", file.name, reqFile)
+        val disposable = Api.endpoint.postImageUpload(body)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                view.hideLoading()
+                if(it.success == true){
+                    view.onsucces(it)
+                }else{
+                    view.onreject(it)
+                }
+                Log.d(" success ", " Success ${it.toString()}")
+            },{
+                view.hideLoading()
+                Log.e("error", it.toString())
+            })
+        mCompositeDisposable!!.add(disposable)
     }
 
     override fun subscribe() {
